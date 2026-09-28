@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <div class="row">
+        @if (SidebarOpen) {
+            <div class="col-lg-2">
+                <app-admin-sidebar></app-admin-sidebar>
+            </div>
+        }   
+        <div class="col">
+            <!-- banner-header -->
+            <div class="row">
+                <div class="d-flex bg-success justify-content-between align-items=center text-light p-3">
+                    <h3><button (click)="toggle()" class="btn"><i class="fa-solid fa-bars text-light fs-3"></i></button>ADMIN</h3>
+                    <!-- dropdown -->
+                     <div class="dropdown">
+                        <button class="btn dropdown-toggle text-light" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><button (click)="logout()" class="dropdown-item"><i class="fa-solid fa-power-off"></i> Logout</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- cards -->
+             <div class="row my-5">
+                <!-- user-card -->
+                 <div class="col-lg-3">
+                    <div style="background-color: rgb(217, 180, 70);" class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-users fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Users</h4>
+                            <h5> {{ (userCount$ |async)?.length }} </h5>
+                        </div>
+                    </div>
+                 </div>
+                 <!-- recipe-card -->
+                  <div class="col-lg-3">
+                    <div style="background-color: rgb(122, 217, 70);" class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-bowl-rice fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Recipes</h4>
+                            <h5> {{ (recipeCount$ |async)?.length }} </h5>
+                        </div>
+                    </div>
+                 </div>
+                 <!-- download-card -->
+                 <div class="col-lg-3">
+                    <div style="background-color: rgb(70, 156, 217);" class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-download fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Downloads</h4>
+                            <h5> {{ (downloadCount$ |async)?.length }} </h5>
+                        </div>
+                    </div>
+                 </div>
+                 <!-- feedback-card -->
+                 <div class="col-lg-3">
+                    <div style="background-color: rgb(188, 70, 217);" class="d-flex p-2 rounded text-light align-items-center justify-content-center">
+                        <i class="fa-solid fa-message fs-1"></i>
+                        <div class="ms-5">
+                            <h4>Feedbacks</h4>
+                            <h5> {{ (feedbackCount$ |async)?.length }} </h5>
+                        </div>
+                    </div>
+                 </div>                
+             </div>
+             <!-- chart & calender -->
+              <div class="row mb-5">
+                <div class="col-lg-8">
+                    <!-- chart -->
+                     <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="'bar'"> </canvas>
+                </div>
+                <div class="col-lg-4">
+                    <!-- calender -->
+                     <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar [(selected)]="selected"></mat-calendar>
+                    </mat-card>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

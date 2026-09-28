@@ -1,1 +1,56 @@
-<p>profile works!</p>
+<app-header></app-header>
+<div class="container">
+    <div style="height: 200px;" class="row bg-success"></div>
+    <!-- image -->
+    <div
+        style="height: 200px; width: 200px;border-radius:50%; margin-top: -100px;" 
+        class="p-2 border"
+    >
+        <img width="180px" height="180px" style="border-radius: 50%;" [src]="imgURL()" alt="profile">
+    </div>
+    <!-- upload image operation -->
+     <label for="uploadImg">
+        <input (change)="handleUploadPicture($event)" type="file" hidden id="uploadImg">
+        <span style="margin-left: 100px; margin-top: -30px;" class="btn btn-primary"> 
+            <i class="fa-solid fa-upload"></i> 
+        </span>
+     </label>
+
+     <h1 class="d-flex align-items-center my-5"> 
+        {{username}} <i class="fa-solid fa-check-circle text-primary"></i>
+    </h1>
+
+     <p style="text-align: justify;"> <i class="fa-solid fa-bowl-rice"></i> Passionate about discovering simple, delicious recipes and experimenting in the kitchen. I enjoy trying new cuisine, adding my own twists to classic dishs, and sharing my ccoking experiences with the Cookpedia community.</p>
+
+     <p> <i class="fa-solid fa-wand-magic-sparkles"></i> On Cookpedia, I love exploring quick meals, healthy recipes, and traditional favorites that bring comfort and flavor together.</p>
+
+     <p>
+         <i class="fa-solid fa-map-pin"></i> Favorite Cuisines: Indian, Italian, Continental
+    </p>
+
+     <p><i class="fa-solid fa-heart"></i> Cooking Level: Beginner - Intermediate</p>
+
+     <p>
+         <i class="fa-solid fa-clock"></i> Cooking Style: Quick & Easy Meals
+    </p>
+
+    <h3 class="my-5">Recipe Download List</h3>
+
+    <div class="row">
+        @if ((userDownloads$|async).length>0) {
+            @for (recipe of userDownloads$|async; track $index) {
+        <div class="col-lg-2">
+            <div routerLink="/recipes/{{recipe.recipeId}}" class="p-3">
+                <img [src]="recipe.image" alt="recipe" class="card-img-top img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title"> {{recipe.name}} </h5>
+                </div>
+            </div>
+        </div>
+        }
+        }@else {
+            <p class="fw-bolder">You have not download any recipe yet!!!</p>
+        }
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,1 +1,76 @@
-<p>home works!</p>
+<app-header></app-header>
+<div class="container">
+    <!-- hero section -->
+     <div class="bg-success p-5 row align-items-center text-light">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-4">
+            <h1> The Easiest way     To Make Your   Favourite Meal  </h1>       
+            <p> Discover 100+ recipes in your hand with the best recipe. Help you to find the easiest way to cook. </p>
+            <a class="btn btn-success border" routerLink="/recipes">Explore Our Recipes</a>
+        </div>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-5">
+            <img class="w-75 landingImg" src="https://www.pngall.com/wp-content/uploads/2/Healthy-Meal.png" alt="recipe">
+        </div>
+     </div>
+    <!-- popular recipe -->
+     <section class="p-5 my-5">
+        <h1>Popular Recipe of the Week</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <p>Our most popular recipes of the week</p>
+            <a routerLink="/recipes">View All</a>
+        </div>
+        <div class="row my-3">
+            <!-- each recipe card : 6 duplicates -->
+             @for (recipe of allRecipes$ |async |slice:0:6; track $index) {
+                <div class="col-lg-4">
+                    <div class="p-3">
+                        <img [src]="recipe.image" alt="recipe" class="card-img-top img-fluid">
+                        <div class="card-body">
+                            <h5 class="card-title">{{recipe.name}}</h5>
+                        </div>
+                    </div>
+                </div>
+             }           
+        </div>
+     </section>
+    <!-- banner -->
+     <section style="height: 400px;background-image: url('https://img.magnific.com/premium-photo/food-banners_583952-13024.jpg');background-size: cover;" class="my-5 row align-items-center">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-6">
+            <div class="bg-light rounded p-5 w-75">
+                <h3>50+ Recipes That Very Quick And Fast</h3>
+                <p class="text-secondary">Find the perfect food ideas to start your day with the quick and easiest way</p>
+            </div>
+        </div>
+     </section>
+    <!-- download app -->
+     <section class="my-5 p-5 bg-success rounded row align-items-center text-light">
+        <div class="col-lg-6">
+            <img height="350px" src="https://toppng.com/uploads/thumbnail/android-app-on-google-play-11568829115kt4gig8l67.png" alt="apps">
+        </div>
+        <div class="col-lg-6 text-center">
+            <h1>Download App</h1>
+            <h5>
+                Download the App from App Store or <br>
+                Google Play for a better experience
+            </h5>
+            <img width="150px" src="https://freepngimg.com/download/android/67006-app-play-google-android-store-free-clipart-hd.png" alt="android">
+            <img width="150px" src="https://benic360.com/wp-content/uploads/2020/06/apple-store-icon-png-8.png" alt="apple">
+        </div>
+     </section>
+    <!-- testimony -->
+     <section class="my-5 text-center">
+        <h1>Client Testimonials</h1>
+        <div class="d-flex my-5 scroll-text">
+            <!-- duplicate feedback -->
+            @for (item of allApproveFeedbacks$ | async; track $index) {
+                <div class="rounded shadow p-3 border me-2 w-25 text-wrap">
+                    <h5>{{item.name}}</h5>
+                    <p>{{item.message}}</p>
+                </div>               
+            }
+        </div>
+     </section>
+</div>
+<app-footer></app-footer>

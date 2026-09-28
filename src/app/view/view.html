@@ -1,1 +1,73 @@
-<p>view works!</p>
+<app-header></app-header>
+<div class="container my-5">
+    
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <a routerLink="/recipes">Back To RecipeList</a>
+            <div class="my-5">
+                <img class="img-fluid" [src]="(recipe$ |async)?.image" alt="recipe">
+            </div>
+            <div class="d-flex justify-content-between">
+                <button (click)="downloadRecipe()" class="btn btn-success">DOWNLOAD RECIPE</button>
+                <button (click)="saveRecipe()" class="btn btn-primary">SAVE RECIPE</button>
+            </div>
+        </div>       
+        <div class="col-lg-6">
+            <h1> {{(recipe$ |async)?.name}} </h1>
+            <div class="row my-4">
+                <div class="col-lg-4">
+                    <h6>Cuisine : {{(recipe$|async)?.cuisine}} </h6>
+                </div>
+                <div class="col-lg-4">
+                    <h6>Servings : {{(recipe$|async)?.servings}} </h6>
+                </div>
+                <div class="col-lg-4">
+                    <h6>Mode Of Cooking : {{(recipe$|async)?.difficulty}} </h6>
+                </div>
+                <div class="col-lg-4 mt-2 text-md-center">
+                    <img width="70px" src="https://static.vecteezy.com/system/resources/previews/019/873/848/non_2x/table-alarm-clock-icon-transparent-free-icon-free-png.png" alt="Preptime">
+                    <h6>Preparation Time : {{(recipe$|async)?.prepTimeMinutes}} Minutes </h6>
+                </div>
+                <div class="col-lg-4 mt-2 text-md-center">
+                    <img width="120px" src="https://i.pinimg.com/originals/f5/fd/5f/f5fd5f664d23060152a44bd3e6cdea94.jpg" alt="Cooktime">
+                    <h6>Cooking Time : {{(recipe$|async)?.cookTimeMinutes}} Minutes </h6>
+                </div>
+                <div class="col-lg-4 mt-2 text-md-center">
+                    <img width="70px" src="https://clipart-library.com/newhp/kissclipart-calories-icon-png-clipart-calorie-computer-icons-45d6aef4c7c26521.png" alt="Calorie">
+                    <h6>Calorie Per Servings : {{(recipe$|async)?.caloriesPerServing}}  </h6>
+                </div>
+            </div>
+            <h3>Ingredients Needed</h3>
+            <ol>
+                @for (item of (recipe$|async)?.ingredients; track $index) {
+                    <li> {{item}} </li>
+                }
+            </ol>
+            <h3>Instructions Needed</h3>
+            <ol>
+                @for (item of (recipe$|async)?.instructions; track $index) {
+                    <li> {{item}} </li>
+                }
+            </ol>
+        </div>
+    </div>
+    <h1>All Related Recipes</h1>
+    <div class="row">
+    <!-- duplicated according to related recipe array -->
+        @for (recipe of allRelatedRecipes(); track $index) {
+        <div class="col-lg-2">
+            <div (click)="viewRecipeFromRelatedRecipes(recipe._id,recipe.cuisine)" class="p-3">
+                <img [src]="recipe.image" alt="recipe" class="card-img-top img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title"> {{recipe.name}} </h5>
+                </div>
+            </div>
+        </div>
+        }
+        <!-- if no related recipes -->
+         @if (allRelatedRecipes().length==0) {
+            <p class="my-2">No Related Recipes Found!!!</p>
+         }
+    </div>
+</div>
+<app-footer></app-footer>

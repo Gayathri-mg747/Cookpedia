@@ -1,1 +1,11 @@
-<p>pnf works!</p>
+<div style="height: 100vh;" class="d-flex justify-content-center align-items-center flex-column">
+    <h1>404!</h1>
+    <img class="img-fluid w-25" src="https://cdn.svgator.com/images/2022/01/funny-404-error-page-design.gif" alt="page not found">
+    <h2 class="mt-2">Look like you're lost!!!</h2>
+    <p>Page your looking is not available</p>
+    @if (role=="admin") {
+        <a routerLink="/admin" class="btn btn-success my-3">Back To Home</a>
+    }@else {
+        <a routerLink="/" class="btn btn-success my-3">Back To Home</a>
+    }
+</div>
