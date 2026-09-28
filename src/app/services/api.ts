@@ -8,7 +8,7 @@ import { RecipeModel } from '../admin/models/recipeModel';
 })
 export class Api {
   
-  server_url:string = "http://localhost:3000"
+  server_url:string = "https://cookpedia-backend-4khb.onrender.com/"
   http = inject(HttpClient)
 
   // get http://localhost:3000/recipes : get request by Home & Recipe component when page loads
